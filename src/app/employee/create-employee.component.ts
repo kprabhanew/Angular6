@@ -18,7 +18,11 @@ export class CreateEmployeeComponent implements OnInit {
     })
   }
   onSubmit(): void {
-    console.log(this.employeeForm.value)
+    console.log(this.employeeForm);
+    console.log(this.employeeForm.touched);
+
+    console.log(this.employeeForm.controls.fullname.value)
+    console.log(this.employeeForm.get("fullname").value)
   }
 
 }

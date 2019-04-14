@@ -23,6 +23,32 @@
     
   </div>
 </form>
-<pre style="border:1px solid #dedede">
-  {{this.employeeForm.value | json}}
-</pre>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>FormGroup</th>
+        <th>FormControl(fullname)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>touched : {{employeeForm.touched}}</li>
+            <li>dirty: {{employeeForm.dirty}}</li>
+            <li>valid: {{employeeForm.valid}}</li>
+            <li>Form Values : {{employeeForm.value | json}}</li>
+          </ul>
+        </td>
+        <td>
+            <ul>
+                <li>touched : {{employeeForm.get("fullname").touched}}</li>
+                <li>dirty: {{employeeForm.get("fullname").dirty}}</li>
+                <li>valid: {{employeeForm.get("fullname").valid}}</li>
+                <li>Form Name Value : {{employeeForm.get("fullname").value }}</li>
+              </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
