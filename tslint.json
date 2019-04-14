@@ -71,7 +71,8 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "semicolon": false
+    "semicolon": false,
+    "no-unused-expression": false
     
   }
 }

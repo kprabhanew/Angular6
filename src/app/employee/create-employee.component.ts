@@ -22,7 +22,30 @@ export class CreateEmployeeComponent implements OnInit {
       })
     })
   }
-  onSubmit(): void {
+  onLoadDataClick(): void {
+  //   this.employeeForm.setValue({
+  //     fullname: "John smith",
+  //     email: "john@abc.com",
+  //     skills: {
+  //       skillName: "Nodejs",
+  //       totalexperience: 10,
+  //       proficiency: 'beginner'
+  //   }
+  // });
+
+  this.employeeForm.patchValue({
+    fullname: "John smith",
+    email: "john@abc.com"
+    // skills: {
+    //   skillName: "Nodejs",
+    //   totalexperience: 10,
+    //   proficiency: 'beginner'
+    // }
+});
+
+}
+
+  onsubmit(): void {
     console.log(this.employeeForm);
     console.log(this.employeeForm.touched);
 
