@@ -72,7 +72,8 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "semicolon": false,
-    "no-unused-expression": false
+    "no-unused-expression": false,
+    "align": false
     
   }
 }

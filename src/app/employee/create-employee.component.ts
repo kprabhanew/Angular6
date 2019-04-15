@@ -8,6 +8,7 @@ import { FormGroup, FormControl, FormBuilder, FormControlName, Validators } from
 })
 export class CreateEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
+  fullnameLength = 0;
 
   constructor(private fb: FormBuilder) { }
 
@@ -16,11 +17,24 @@ export class CreateEmployeeComponent implements OnInit {
       fullname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
       email: [''],
       skills: this.fb.group({
-        skillName: [''],
+        skillName: ['Mongodb'],
         totalexperience: 5,
-        proficiency: 'beginner'
+        proficiency: ['beginner']
       })
     })
+    
+    // FormControl Changes
+    this.employeeForm.get("fullname").valueChanges.subscribe(
+      (value: string) => {
+        this.fullnameLength = value.length;
+        console.log(value)
+      });
+
+      // FormGroup Changes
+      this.employeeForm.valueChanges.subscribe(
+        (value: any) => {
+          console.log(value)
+        });
   }
   onLoadDataClick(): void {
   //   this.employeeForm.setValue({
