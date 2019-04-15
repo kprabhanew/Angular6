@@ -22,42 +22,39 @@ export class CreateEmployeeComponent implements OnInit {
         proficiency: ['beginner']
       })
     })
-    
-    // FormControl Changes
-    this.employeeForm.get("fullname").valueChanges.subscribe(
-      (value: string) => {
-        this.fullnameLength = value.length;
-        console.log(value)
-      });
 
-      // FormGroup Changes
-      this.employeeForm.valueChanges.subscribe(
-        (value: any) => {
-          console.log(value)
-        });
+  } // ngOnInit
+
+  // logKeyValuePairs(group: FormGroup): void {
+  //   console.log(Object.keys(group.controls));
+  // }
+
+  // onLoadDataClick(): void {
+  //   this.logKeyValuePairs(this.employeeForm);
+  // }
+
+  logKeyValuePairs(group: FormGroup): void {
+    // loop through each key in the FormGroup
+    Object.keys(group.controls).forEach((key: string) => {
+      // Get a reference to the control using the FormGroup.get() method
+      const abstractControl = group.get(key);
+      // If the control is an instance of FormGroup i.e a nested FormGroup
+      // then recursively call this same method (logKeyValuePairs) passing it
+      // the FormGroup so we can get to the form controls in it
+      if (abstractControl instanceof FormGroup) {
+        this.logKeyValuePairs(abstractControl);
+        // If the control is not a FormGroup then we know it's a FormControl
+      } else {
+        // abstractControl.disable();
+        // abstractControl.markAsDirty();
+        console.log('Key = ' + key + ' && Value = ' + abstractControl.value);
+      }
+    });
   }
+
   onLoadDataClick(): void {
-  //   this.employeeForm.setValue({
-  //     fullname: "John smith",
-  //     email: "john@abc.com",
-  //     skills: {
-  //       skillName: "Nodejs",
-  //       totalexperience: 10,
-  //       proficiency: 'beginner'
-  //   }
-  // });
-
-  this.employeeForm.patchValue({
-    fullname: "John smith",
-    email: "john@abc.com"
-    // skills: {
-    //   skillName: "Nodejs",
-    //   totalexperience: 10,
-    //   proficiency: 'beginner'
-    // }
-});
-
-}
+    this.logKeyValuePairs(this.employeeForm);
+  }
 
   onsubmit(): void {
     console.log(this.employeeForm);

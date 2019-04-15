@@ -73,7 +73,9 @@
     "directive-class-suffix": true,
     "semicolon": false,
     "no-unused-expression": false,
-    "align": false
+    "align": false,
+    "no-trailing-whitespace":false,
+    "curly" : false
     
   }
 }
