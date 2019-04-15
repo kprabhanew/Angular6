@@ -8,4 +8,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Output Screen
 
-![Screen_1](https://github.com/kprabhanew/Angular6/blob/formControlGroup/formgroup_formControl_Screen.PNG)
+![Screen_1](https://github.com/kprabhanew/Angular6/blob/loopControlsRF-11/loopControls.PNG)
