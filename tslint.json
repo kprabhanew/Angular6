@@ -75,7 +75,10 @@
     "no-unused-expression": false,
     "align": false,
     "no-trailing-whitespace":false,
-    "curly" : false
+    "curly" : false,
+    "whitespace" : false,
+    "typedef-whitespace" : false,
+    "forin" : false
     
   }
 }
