@@ -12,73 +12,64 @@ export class CreateEmployeeComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  validationMessages = {
-    "fullname": {
-      "required": "Full Name is required",
-      "maxlength": "Full Name must be less than 10 characters",
-      "minlength": "Full Name must be greater than 2 characters"
-    },
-    "email": {
-      "required": "Email is required"
-    },
-    "skillName": {
-      "required": "Skill Name is required"
-    },
-    "totalexperience": {
-      "required": "Total Experience is required"
-    },
-    "proficiency": {
-      "required": "Proficiency is required"
-    }
-  };
   formErrors = {
-    "fullname":"",
-    "email":"",
-    "skillName":"",
-    "totalexperience":"",
-    "proficiency":""
-  }
-
+    'fullName': '',
+    'email': '',
+    'skillName': '',
+    'experienceInYears': '',
+    'proficiency': ''
+  };
+  
+  validationMessages = {
+    'fullName': {
+      'required': 'Full Name is required.',
+      'minlength': 'Full Name must be greater than 2 characters.',
+      'maxlength': 'Full Name must be less than 2 characters.',
+    },
+    'email': {
+      'required': 'Email is required.'
+    },
+    'skillName': {
+      'required': 'Skill Name is required.',
+    },
+    'experienceInYears': {
+      'required': 'Experience is required.',
+    },
+    'proficiency': {
+      'required': 'Proficiency is required.',
+    },
+  };
+  
   ngOnInit() {
-    // Modify the code to include required validators on
-    // all form controls
+  
     this.employeeForm = this.fb.group({
-      fullname: ['', [Validators.required,
-      Validators.minLength(2), Validators.maxLength(10)]],
+      fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
       email: ['', Validators.required],
       skills: this.fb.group({
         skillName: ['', Validators.required],
-        totalexperience: ['', Validators.required],
+        experienceInYears: ['', Validators.required],
         proficiency: ['', Validators.required]
       }),
     });
-  } // ngOnInit
   
-  // logKeyValuePairs(group: FormGroup): void {
-  //   console.log(Object.keys(group.controls));
-  // }
-
-  logValidationErrorMessages(group: FormGroup): void {
-    // Loop through each control key in the FormGroup
+    // When any of the form control value in employee form changes
+    // our validation function logValidationErrors() is called
+    this.employeeForm.valueChanges.subscribe((data) => {
+      this.logValidationErrors(this.employeeForm);
+    });
+  
+  }
+  
+  logValidationErrors(group: FormGroup = this.employeeForm): void {
     Object.keys(group.controls).forEach((key: string) => {
-      // Get the control. The control can be a nested form group
       const abstractControl = group.get(key);
-      // If the control is nested form group, recursively call
-      // this same method
       if (abstractControl instanceof FormGroup) {
-        this.logValidationErrorMessages(abstractControl);
-        // If the control is a FormControl
+        this.logValidationErrors(abstractControl);
       } else {
-        // Clear the existing validation errors
-         this.formErrors[key] = '';
-        if (abstractControl && !abstractControl.valid) {
-          // Get all the validation messages of the form control
-          // that has failed the validation
+        this.formErrors[key] = '';
+        if (abstractControl && !abstractControl.valid
+            && (abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
-          // Find which validation has failed. For example required,
-          // minlength or maxlength. Store that error message in the
-          // formErrors object. The UI will bind to this object to
-          // display the validation errors
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {
               this.formErrors[key] += messages[errorKey] + ' ';
@@ -90,7 +81,7 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   onLoadDataClick(): void {
-    this.logValidationErrorMessages(this.employeeForm);
+    this.logValidationErrors(this.employeeForm);
     console.log('Form Error Object : ' ,this.formErrors);
   }
 
